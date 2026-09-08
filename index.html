@@ -135,7 +135,7 @@
           <a href="#seguranca">Segurança</a>
           <a href="#comecar">Começar</a>
         </div>
-        <a href="#comecar" class="btn btn-ghost">Entrar</a>
+        <a href="#" data-app class="btn btn-ghost">Entrar</a>
       </nav>
     </div>
   </header>
@@ -333,6 +333,15 @@
       if(APP_DOWNLOAD_URL){ a.href = APP_DOWNLOAD_URL; a.target = '_blank'; a.rel = 'noopener'; }
       else { a.addEventListener('click', e=>{ e.preventDefault(); alert('Configure o link de download em landing/index.html (variável APP_DOWNLOAD_URL).'); }); }
     });
+
+    /* ===========================================================
+       LINK DO APP (botão "Entrar"):
+       Meta = mesmo domínio da landing, via subdomínio (ex.: https://app.SEU-DOMINIO).
+       Enquanto o subdomínio não estiver configurado no Vercel, aponta para a URL atual.
+       Troque APENAS esta linha quando o subdomínio estiver pronto.
+       =========================================================== */
+    const APP_URL = 'https://prontuario-medico-ivory.vercel.app';
+    document.querySelectorAll('[data-app]').forEach(a=>{ a.href = APP_URL; });
 
     // Scroll reveal
     const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }}),{threshold:.15});
